@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
 
 <title>Aventura na Biblioteca</title>
 
 <style>
+
+/* =====================================================
+   CONFIGURAÇÃO GERAL
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -30,40 +40,107 @@ body {
     touch-action: none;
 }
 
+
+/* =====================================================
+   INTERFACE SUPERIOR
+===================================================== */
+
 #interface {
+
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 65px;
+
     background: rgba(15, 23, 42, 0.95);
+
     display: flex;
+
     align-items: center;
     justify-content: space-around;
+
     font-size: 15px;
+
     z-index: 5;
 }
 
-#controles {
+
+/* =====================================================
+   OBJETIVO DA MISSÃO
+===================================================== */
+
+#objetivo {
+
     position: fixed;
+
+    top: 72px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: rgba(15, 23, 42, 0.92);
+
+    border: 2px solid #facc15;
+
+    border-radius: 12px;
+
+    padding: 8px 18px;
+
+    font-size: 15px;
+
+    color: #facc15;
+
+    z-index: 6;
+
+    text-align: center;
+
+    max-width: 90%;
+}
+
+
+/* =====================================================
+   CONTROLES
+===================================================== */
+
+#controles {
+
+    position: fixed;
+
     bottom: 20px;
     left: 20px;
+
     width: 190px;
     height: 170px;
+
     z-index: 10;
 }
 
+
 .botao {
+
     position: absolute;
+
     width: 58px;
     height: 58px;
+
     border-radius: 15px;
+
     border: 2px solid white;
+
     background: rgba(37, 99, 235, 0.85);
+
     color: white;
+
     font-size: 26px;
+
     font-weight: bold;
+
+    touch-action: manipulation;
 }
+
 
 #cima {
     left: 66px;
@@ -85,292 +162,568 @@ body {
     top: 56px;
 }
 
+
+/* =====================================================
+   BOTÃO INTERAGIR
+===================================================== */
+
 #interagir {
+
     position: fixed;
+
     right: 25px;
     bottom: 35px;
-    width: 130px;
+
+    width: 140px;
     height: 65px;
+
     background: #16a34a;
+
     border: 3px solid white;
+
     border-radius: 15px;
+
     color: white;
+
     font-size: 18px;
+
     font-weight: bold;
+
     z-index: 100;
+
     cursor: pointer;
+
+    touch-action: manipulation;
+
+    pointer-events: auto;
+}
+
+#interagir:active {
+
+    transform: scale(0.95);
+
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+#menu {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #1e3a8a
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 200;
+
+    text-align: center;
+}
+
+
+#menu h1 {
+
+    font-size: 42px;
+
+    margin-bottom: 15px;
+
+    color: #facc15;
+}
+
+
+#menu p {
+
+    font-size: 18px;
+
+    max-width: 600px;
+
+    padding: 0 20px;
+}
+
+
+#comecar {
+
+    margin-top: 30px;
+
+    padding: 18px 55px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   DIÁLOGO
+===================================================== */
+
+#dialogo {
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 25px;
+
+    transform: translateX(-50%);
+
+    width: min(850px, 90%);
+
+    background: rgba(15, 23, 42, 0.97);
+
+    border: 3px solid white;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    z-index: 150;
+
+    display: none;
+}
+
+
+#dialogo h2 {
+
+    color: #facc15;
+
+    margin-top: 0;
+}
+
+
+#dialogo p {
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   PERGUNTA
+===================================================== */
+
+#pergunta {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.75);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 180;
+}
+
+
+#caixaPergunta {
+
+    width: min(650px, 90%);
+
+    background: #172033;
+
+    border: 3px solid #facc15;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+
+.resposta {
+
+    width: 90%;
+
+    margin: 10px auto;
+
+    padding: 15px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
     touch-action: manipulation;
 }
 
-#menu {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #111827, #1e3a8a);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-    text-align: center;
+
+.resposta:active {
+
+    transform: scale(0.97);
+
 }
 
-#menu h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
-    color: #facc15;
-}
 
-#menu p {
-    font-size: 18px;
-    max-width: 600px;
-}
-
-#comecar {
-    margin-top: 30px;
-    padding: 18px 55px;
-    border: none;
-    border-radius: 15px;
-    background: #2563eb;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#dialogo {
-    position: fixed;
-    left: 50%;
-    bottom: 25px;
-    transform: translateX(-50%);
-    width: min(850px, 90%);
-    background: rgba(15, 23, 42, 0.97);
-    border: 3px solid white;
-    border-radius: 15px;
-    padding: 20px;
-    z-index: 15;
-    display: none;
-}
-
-#dialogo h2 {
-    color: #facc15;
-    margin-top: 0;
-}
-
-#dialogo p {
-    font-size: 18px;
-}
-
-#pergunta {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 30;
-}
-
-#caixaPergunta {
-    width: min(650px, 90%);
-    background: #172033;
-    border: 3px solid #facc15;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
-}
-
-.resposta {
-    width: 90%;
-    margin: 10px auto;
-    padding: 15px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 17px;
-    cursor: pointer;
-}
+/* =====================================================
+   VITÓRIA
+===================================================== */
 
 #vitoria {
+
     position: fixed;
+
     inset: 0;
+
     background: rgba(0,0,0,0.94);
+
     display: none;
+
     align-items: center;
+
     justify-content: center;
-    z-index: 40;
+
+    z-index: 250;
+
     text-align: center;
+
     overflow-y: auto;
+
     padding: 20px;
 }
 
+
 #vitoriaBox {
+
     width: min(650px, 95%);
-    background: linear-gradient(145deg, #172033, #1e3a8a);
+
+    background:
+        linear-gradient(
+            145deg,
+            #172033,
+            #1e3a8a
+        );
+
     border: 3px solid #facc15;
+
     border-radius: 25px;
+
     padding: 30px;
-    box-shadow: 0 0 40px rgba(250,204,21,0.25);
+
+    box-shadow:
+        0 0 40px
+        rgba(250,204,21,0.25);
 }
 
+
 #vitoriaBox h1 {
+
     color: #facc15;
+
     margin-top: 0;
 }
 
+
 .medalha {
+
     width: 110px;
     height: 110px;
+
     margin: 10px auto 20px;
+
     border-radius: 50%;
+
     border: 7px solid #facc15;
+
     background: #2563eb;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     font-size: 55px;
-    box-shadow: 0 0 25px rgba(250,204,21,0.5);
+
+    box-shadow:
+        0 0 25px
+        rgba(250,204,21,0.5);
 }
 
+
 .recompensa {
+
     background: rgba(15,23,42,0.8);
+
     border: 2px solid #facc15;
+
     border-radius: 18px;
+
     padding: 18px;
+
     margin: 20px 0;
 }
 
+
 .recompensa h2 {
+
     color: #facc15;
+
     margin-top: 0;
 }
 
-#nomeAluno {
-    width: 90%;
-    max-width: 450px;
-    padding: 14px;
-    border-radius: 10px;
-    border: 2px solid #64748b;
-    font-size: 17px;
-    text-align: center;
-    margin: 10px;
-    color: #111827;
-}
-
-.botaoFinal {
-    padding: 14px 25px;
-    margin: 6px;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#gerarCertificado {
-    background: #2563eb;
-}
-
-#reiniciar {
-    background: #16a34a;
-}
-
-#certificado {
-    display: none;
-}
 
 /* =====================================================
    CERTIFICADO
 ===================================================== */
 
+#nomeAluno {
+
+    width: 90%;
+
+    max-width: 450px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    border: 2px solid #64748b;
+
+    font-size: 17px;
+
+    text-align: center;
+
+    margin: 10px;
+
+    color: #111827;
+}
+
+
+.botaoFinal {
+
+    padding: 14px 25px;
+
+    margin: 6px;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+#gerarCertificado {
+
+    background: #2563eb;
+
+}
+
+
+#reiniciar {
+
+    background: #16a34a;
+
+}
+
+
+#certificado {
+
+    display: none;
+}
+
+
+/* =====================================================
+   IMPRESSÃO DO CERTIFICADO
+===================================================== */
+
 @media print {
 
     body * {
+
         visibility: hidden !important;
+
     }
+
 
     #certificado,
     #certificado * {
+
         visibility: visible !important;
+
     }
 
+
     #certificado {
+
         display: block !important;
+
         position: absolute;
+
         left: 0;
         top: 0;
+
         width: 100%;
         height: 100vh;
+
         background: white;
+
         color: #111827;
+
         padding: 40px;
     }
 
+
     .certificadoFolha {
+
         width: 100%;
         height: 100%;
+
         border: 10px double #1e3a8a;
+
         padding: 60px 40px;
+
         text-align: center;
+
         display: flex;
+
         flex-direction: column;
+
         justify-content: center;
+
         align-items: center;
     }
 
+
     .certificadoTitulo {
+
         font-size: 42px;
+
         color: #1e3a8a;
     }
 
+
     .certificadoNome {
+
         font-size: 34px;
+
         font-weight: bold;
+
         color: #111827;
+
         margin: 30px;
     }
 
+
     .certificadoTexto {
+
         font-size: 20px;
+
         line-height: 1.7;
+
         max-width: 800px;
     }
 
+
     .certificadoMedalha {
+
         font-size: 70px;
+
         margin: 20px;
     }
 
+
     .certificadoRodape {
+
         margin-top: 40px;
+
         font-size: 16px;
     }
+
 }
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
 
 @media (max-width: 700px) {
 
     #interface {
+
         font-size: 12px;
+
     }
+
 
     #menu h1 {
+
         font-size: 30px;
+
     }
+
 
     #menu p {
+
         font-size: 15px;
-        padding: 10px;
+
     }
+
+
+    #objetivo {
+
+        font-size: 12px;
+
+        top: 70px;
+
+    }
+
 
     #vitoriaBox {
+
         padding: 20px;
+
     }
 
+
     .medalha {
+
         width: 85px;
+
         height: 85px;
+
         font-size: 42px;
+
     }
 
 }
@@ -379,32 +732,35 @@ body {
 
 </head>
 
+
 <body>
 
+
 <!-- =====================================================
-     MENU INICIAL
+     MENU
 ===================================================== -->
 
 <div id="menu">
 
-```
-<h1>📚 AVENTURA NA BIBLIOTECA</h1>
+    <h1>
+        📚 AVENTURA NA BIBLIOTECA
+    </h1>
 
-<p>
-    Explore a biblioteca, converse com os personagens,
-    complete desafios e conquiste recompensas.
-</p>
+    <p>
+        Explore a biblioteca, converse com os personagens,
+        complete desafios e conquiste recompensas.
+    </p>
 
-<p>
-    🎯 Objetivo: aprender, explorar e preservar o conhecimento.
-</p>
+    <p>
+        🎯 Objetivo: aprender, explorar e preservar o conhecimento.
+    </p>
 
-<button id="comecar">
-    COMEÇAR
-</button>
-```
+    <button id="comecar">
+        COMEÇAR
+    </button>
 
 </div>
+
 
 <!-- =====================================================
      INTERFACE
@@ -412,25 +768,44 @@ body {
 
 <div id="interface">
 
-```
-<span>📚 Biblioteca</span>
+    <span>
+        📚 Biblioteca
+    </span>
 
-<span>
-    ⭐ <b id="pontos">0</b>
-</span>
+    <span>
+        ⭐ <b id="pontos">0</b>
+    </span>
 
-<span>
-    🪙 <b id="moedas">0</b>
-</span>
+    <span>
+        🪙 <b id="moedas">0</b>
+    </span>
 
-<span>
-    ❤️ <b id="energia">100</b>
-</span>
-```
+    <span>
+        ❤️ <b id="energia">100</b>
+    </span>
 
 </div>
 
-<canvas id="jogo" width="1000" height="650"></canvas>
+
+<!-- =====================================================
+     OBJETIVO
+===================================================== -->
+
+<div id="objetivo">
+    🎯 Objetivo: Encontre o Professor
+</div>
+
+
+<!-- =====================================================
+     CANVAS
+===================================================== -->
+
+<canvas
+    id="jogo"
+    width="1000"
+    height="650">
+</canvas>
+
 
 <!-- =====================================================
      CONTROLES
@@ -438,21 +813,33 @@ body {
 
 <div id="controles">
 
-```
-<button class="botao" id="cima">▲</button>
+    <button class="botao" id="cima">
+        ▲
+    </button>
 
-<button class="botao" id="baixo">▼</button>
+    <button class="botao" id="baixo">
+        ▼
+    </button>
 
-<button class="botao" id="esquerda">◀</button>
+    <button class="botao" id="esquerda">
+        ◀
+    </button>
 
-<button class="botao" id="direita">▶</button>
-```
+    <button class="botao" id="direita">
+        ▶
+    </button>
 
 </div>
+
+
+<!-- =====================================================
+     INTERAGIR
+===================================================== -->
 
 <button id="interagir">
     INTERAGIR
 </button>
+
 
 <!-- =====================================================
      DIÁLOGO
@@ -460,25 +847,24 @@ body {
 
 <div id="dialogo">
 
-```
-<h2 id="nomeDialogo">
-    Professor
-</h2>
+    <h2 id="nomeDialogo">
+        Professor
+    </h2>
 
-<p id="textoDialogo"></p>
+    <p id="textoDialogo"></p>
 
-<p>
-    <b>
-        Toque em CONTINUAR para prosseguir.
-    </b>
-</p>
+    <p>
+        <b>
+            Toque em CONTINUAR para prosseguir.
+        </b>
+    </p>
 
-<button id="continuar" class="resposta">
-    CONTINUAR
-</button>
-```
+    <button id="continuar" class="resposta">
+        CONTINUAR
+    </button>
 
 </div>
+
 
 <!-- =====================================================
      PERGUNTA
@@ -486,113 +872,121 @@ body {
 
 <div id="pergunta">
 
-```
-<div id="caixaPergunta">
+    <div id="caixaPergunta">
 
-    <h2>
-        ❓ DESAFIO DA BIBLIOTECA
-    </h2>
+        <h2>
+            ❓ DESAFIO DA BIBLIOTECA
+        </h2>
 
-    <p>
-        Qual atitude ajuda na preservação
-        e organização de uma biblioteca?
-    </p>
+        <p>
+            Qual atitude ajuda na preservação
+            e organização de uma biblioteca?
+        </p>
 
-    <button class="resposta" id="respostaA">
-        A — Jogar livros fora
-    </button>
+        <button
+            class="resposta"
+            id="respostaA">
 
-    <button class="resposta" id="respostaB">
-        B — Cuidar dos livros
-    </button>
+            A — Jogar livros fora
+
+        </button>
+
+        <button
+            class="resposta"
+            id="respostaB">
+
+            B — Cuidar dos livros
+
+        </button>
+
+    </div>
 
 </div>
-```
 
-</div>
 
 <!-- =====================================================
-     TELA DE VITÓRIA E RECOMPENSA
+     VITÓRIA
 ===================================================== -->
 
 <div id="vitoria">
 
-```
-<div id="vitoriaBox">
+    <div id="vitoriaBox">
 
-    <h1>
-        🏆 MISSÃO CONCLUÍDA!
-    </h1>
+        <h1>
+            🏆 MISSÃO CONCLUÍDA!
+        </h1>
 
-    <div class="medalha">
-        🥇
+        <div class="medalha">
+            🥇
+        </div>
+
+        <p>
+            Parabéns! Você completou o desafio
+            da Biblioteca do Conhecimento.
+        </p>
+
+        <div class="recompensa">
+
+            <h2>
+                🎓 RECOMPENSA DESBLOQUEADA
+            </h2>
+
+            <h3>
+                🥇 MEDALHA DO CONHECIMENTO
+            </h3>
+
+            <p>
+                Você demonstrou responsabilidade,
+                conhecimento e cuidado com a biblioteca.
+            </p>
+
+            <p>
+                ⭐ Pontos:
+                <b id="pontosFinal">0</b>
+            </p>
+
+            <p>
+                🪙 Moedas:
+                <b id="moedasFinal">0</b>
+            </p>
+
+        </div>
+
+        <p>
+            <b>
+                Digite seu nome para gerar seu certificado:
+            </b>
+        </p>
+
+        <input
+            id="nomeAluno"
+            type="text"
+            maxlength="60"
+            placeholder="Digite seu nome"
+        >
+
+        <br>
+
+        <button
+            id="gerarCertificado"
+            class="botaoFinal">
+
+            🎓 GERAR CERTIFICADO
+
+        </button>
+
+        <button
+            id="reiniciar"
+            class="botaoFinal">
+
+            🔄 JOGAR NOVAMENTE
+
+        </button>
+
     </div>
 
-    <p>
-        Parabéns! Você completou o desafio
-        da Biblioteca do Conhecimento.
-    </p>
-
-    <div class="recompensa">
-
-        <h2>
-            🎓 RECOMPENSA DESBLOQUEADA
-        </h2>
-
-        <h3>
-            🥇 MEDALHA DO CONHECIMENTO
-        </h3>
-
-        <p>
-            Você demonstrou responsabilidade,
-            conhecimento e cuidado com a biblioteca.
-        </p>
-
-        <p>
-            ⭐ Pontos:
-            <b id="pontosFinal">0</b>
-        </p>
-
-        <p>
-            🪙 Moedas:
-            <b id="moedasFinal">0</b>
-        </p>
-
-    </div>
-
-    <p>
-        <b>
-            Digite seu nome para gerar seu certificado:
-        </b>
-    </p>
-
-    <input
-        id="nomeAluno"
-        type="text"
-        maxlength="60"
-        placeholder="Digite seu nome"
-    >
-
-    <br>
-
-    <button
-        id="gerarCertificado"
-        class="botaoFinal"
-    >
-        🎓 GERAR CERTIFICADO
-    </button>
-
-    <button
-        id="reiniciar"
-        class="botaoFinal"
-    >
-        🔄 JOGAR NOVAMENTE
-    </button>
-
 </div>
-```
 
-</div>
 
 <!-- =====================================================
      CERTIFICADO
@@ -600,76 +994,82 @@ body {
 
 <div id="certificado">
 
-```
-<div class="certificadoFolha">
+    <div class="certificadoFolha">
 
-    <div class="certificadoMedalha">
-        🏆
-    </div>
+        <div class="certificadoMedalha">
+            🏆
+        </div>
 
-    <div class="certificadoTitulo">
-        CERTIFICADO
-    </div>
+        <div class="certificadoTitulo">
+            CERTIFICADO
+        </div>
 
-    <h2>
-        Explorador da Biblioteca
-    </h2>
+        <h2>
+            Explorador da Biblioteca
+        </h2>
 
-    <div class="certificadoNome" id="nomeCertificado">
-        Nome do aluno
-    </div>
+        <div
+            class="certificadoNome"
+            id="nomeCertificado">
 
-    <div class="certificadoTexto">
+            Nome do aluno
 
-        Certificamos que o(a) estudante acima identificado(a)
-        concluiu com êxito a atividade educativa
-        <b>“Aventura na Biblioteca”</b>,
-        demonstrando conhecimento sobre a preservação,
-        organização e valorização do conhecimento.
+        </div>
 
-        <br><br>
+        <div class="certificadoTexto">
 
-        <b>
-            Medalha do Conhecimento 🥇
-        </b>
+            Certificamos que o(a) estudante acima identificado(a)
+            concluiu com êxito a atividade educativa
+            <b>“Aventura na Biblioteca”</b>,
+            demonstrando conhecimento sobre a preservação,
+            organização e valorização do conhecimento.
 
-        <br>
+            <br><br>
 
-        Pontuação conquistada:
-        <span id="pontosCertificado">0</span> pontos
+            <b>
+                Medalha do Conhecimento 🥇
+            </b>
 
-        <br>
+            <br>
 
-        Moedas conquistadas:
-        <span id="moedasCertificado">0</span>
+            Pontuação conquistada:
+            <span id="pontosCertificado">0</span>
+            pontos
 
-    </div>
+            <br>
 
-    <div class="certificadoRodape">
+            Moedas conquistadas:
+            <span id="moedasCertificado">0</span>
 
-        Aventura na Biblioteca<br>
-        Jogo educacional interativo<br>
-        Atividade acadêmica — UFMS<br><br>
+        </div>
 
-        Data:
-        <span id="dataCertificado"></span>
+        <div class="certificadoRodape">
+
+            Aventura na Biblioteca<br>
+            Jogo educacional interativo<br>
+            Atividade acadêmica — UFMS<br><br>
+
+            Data:
+            <span id="dataCertificado"></span>
+
+        </div>
 
     </div>
 
 </div>
-```
 
-</div>
 
 <script>
 
 /* =====================================================
-   CONFIGURAÇÃO DO JOGO
+   CONFIGURAÇÃO
 ===================================================== */
 
-const canvas = document.getElementById("jogo");
+const canvas =
+    document.getElementById("jogo");
 
-const ctx = canvas.getContext("2d");
+const ctx =
+    canvas.getContext("2d");
 
 
 /* =====================================================
@@ -746,21 +1146,61 @@ const bibliotecaria = {
 
 const paredes = [
 
-    {x: 30, y: 90, w: 940, h: 25},
+    {
+        x: 30,
+        y: 90,
+        w: 940,
+        h: 25
+    },
 
-    {x: 30, y: 575, w: 940, h: 25},
+    {
+        x: 30,
+        y: 575,
+        w: 940,
+        h: 25
+    },
 
-    {x: 30, y: 90, w: 25, h: 510},
+    {
+        x: 30,
+        y: 90,
+        w: 25,
+        h: 510
+    },
 
-    {x: 945, y: 90, w: 25, h: 510},
+    {
+        x: 945,
+        y: 90,
+        w: 25,
+        h: 510
+    },
 
-    {x: 300, y: 115, w: 20, h: 170},
+    {
+        x: 300,
+        y: 115,
+        w: 20,
+        h: 170
+    },
 
-    {x: 300, y: 390, w: 20, h: 185},
+    {
+        x: 300,
+        y: 390,
+        w: 20,
+        h: 185
+    },
 
-    {x: 650, y: 115, w: 20, h: 170},
+    {
+        x: 650,
+        y: 115,
+        w: 20,
+        h: 170
+    },
 
-    {x: 650, y: 390, w: 20, h: 185}
+    {
+        x: 650,
+        y: 390,
+        w: 20,
+        h: 185
+    }
 
 ];
 
@@ -771,15 +1211,40 @@ const paredes = [
 
 const estantes = [
 
-    {x: 90, y: 170, w: 140, h: 45},
+    {
+        x: 90,
+        y: 170,
+        w: 140,
+        h: 45
+    },
 
-    {x: 90, y: 245, w: 140, h: 45},
+    {
+        x: 90,
+        y: 245,
+        w: 140,
+        h: 45
+    },
 
-    {x: 370, y: 160, w: 190, h: 45},
+    {
+        x: 370,
+        y: 160,
+        w: 190,
+        h: 45
+    },
 
-    {x: 370, y: 230, w: 190, h: 45},
+    {
+        x: 370,
+        y: 230,
+        w: 190,
+        h: 45
+    },
 
-    {x: 370, y: 430, w: 190, h: 45}
+    {
+        x: 370,
+        y: 430,
+        w: 190,
+        h: 45
+    }
 
 ];
 
@@ -790,31 +1255,28 @@ const estantes = [
 
 const mesas = [
 
-    {x: 710, y: 170, w: 150, h: 55},
+    {
+        x: 710,
+        y: 170,
+        w: 150,
+        h: 55
+    },
 
-    {x: 710, y: 270, w: 150, h: 55},
+    {
+        x: 710,
+        y: 270,
+        w: 150,
+        h: 55
+    },
 
-    {x: 710, y: 430, w: 150, h: 55}
+    {
+        x: 710,
+        y: 430,
+        w: 150,
+        h: 55
+    }
 
 ];
-
-
-/* =====================================================
-   DESENHO
-===================================================== */
-
-function desenharRetangulo(obj, cor) {
-
-    ctx.fillStyle = cor;
-
-    ctx.fillRect(
-        obj.x,
-        obj.y,
-        obj.w || obj.largura,
-        obj.h || obj.altura
-    );
-
-}
 
 
 /* =====================================================
@@ -825,35 +1287,51 @@ function colisao(a, b) {
 
     return (
 
-        a.x < b.x + (b.w || b.largura) &&
+        a.x <
+        b.x + (b.w || b.largura)
 
-        a.x + a.largura > b.x &&
+        &&
 
-        a.y < b.y + (b.h || b.altura) &&
+        a.x + a.largura >
+        b.x
 
-        a.y + a.altura > b.y
+        &&
+
+        a.y <
+        b.y + (b.h || b.altura)
+
+        &&
+
+        a.y + a.altura >
+        b.y
 
     );
 
 }
 
 
+/* =====================================================
+   PODE ANDAR?
+===================================================== */
+
 function podeAndar(novoX, novoY) {
 
-    let novo = {
+    const novo = {
 
         x: novoX,
 
         y: novoY,
 
-        largura: jogador.largura,
+        largura:
+            jogador.largura,
 
-        altura: jogador.altura
+        altura:
+            jogador.altura
 
     };
 
 
-    for (let parede of paredes) {
+    for (const parede of paredes) {
 
         if (colisao(novo, parede)) {
 
@@ -864,7 +1342,7 @@ function podeAndar(novoX, novoY) {
     }
 
 
-    for (let estante of estantes) {
+    for (const estante of estantes) {
 
         if (colisao(novo, estante)) {
 
@@ -875,7 +1353,7 @@ function podeAndar(novoX, novoY) {
     }
 
 
-    for (let mesa of mesas) {
+    for (const mesa of mesas) {
 
         if (colisao(novo, mesa)) {
 
@@ -892,17 +1370,55 @@ function podeAndar(novoX, novoY) {
 
 
 /* =====================================================
-   DISTÂNCIA
+   DISTÂNCIA CORRIGIDA
 ===================================================== */
 
 function distancia(a, b) {
 
-    let dx = a.x - b.x;
+    const ax =
+        a.x + a.largura / 2;
 
-    let dy = a.y - b.y;
+    const ay =
+        a.y + a.altura / 2;
+
+
+    const bx =
+        b.x + b.largura / 2;
+
+    const by =
+        b.y + b.altura / 2;
+
+
+    const dx = ax - bx;
+
+    const dy = ay - by;
+
 
     return Math.sqrt(
         dx * dx + dy * dy
+    );
+
+}
+
+
+/* =====================================================
+   DESENHAR RETÂNGULO
+===================================================== */
+
+function desenharRetangulo(obj, cor) {
+
+    ctx.fillStyle = cor;
+
+    ctx.fillRect(
+
+        obj.x,
+
+        obj.y,
+
+        obj.w || obj.largura,
+
+        obj.h || obj.altura
+
     );
 
 }
@@ -917,25 +1433,22 @@ function desenharLivro(estante) {
     ctx.fillStyle = "#704214";
 
     ctx.fillRect(
+
         estante.x,
         estante.y,
         estante.w,
         estante.h
+
     );
 
 
     const cores = [
 
         "#ef4444",
-
         "#22c55e",
-
         "#3b82f6",
-
         "#f59e0b",
-
         "#a855f7",
-
         "#14b8a6"
 
     ];
@@ -978,11 +1491,8 @@ function desenharPessoa(
     ctx.fillRect(
 
         pessoa.x,
-
         pessoa.y,
-
         pessoa.largura,
-
         pessoa.altura
 
     );
@@ -1001,7 +1511,6 @@ function desenharPessoa(
         15,
 
         0,
-
         Math.PI * 2
 
     );
@@ -1027,7 +1536,7 @@ function desenharPessoa(
 
 
 /* =====================================================
-   BIBLIOTECA
+   DESENHAR BIBLIOTECA
 ===================================================== */
 
 function desenharBiblioteca() {
@@ -1037,17 +1546,14 @@ function desenharBiblioteca() {
     ctx.fillRect(
 
         0,
-
         0,
-
         canvas.width,
-
         canvas.height
 
     );
 
 
-    for (let parede of paredes) {
+    for (const parede of paredes) {
 
         desenharRetangulo(
             parede,
@@ -1057,14 +1563,14 @@ function desenharBiblioteca() {
     }
 
 
-    for (let estante of estantes) {
+    for (const estante of estantes) {
 
         desenharLivro(estante);
 
     }
 
 
-    for (let mesa of mesas) {
+    for (const mesa of mesas) {
 
         desenharRetangulo(
             mesa,
@@ -1092,9 +1598,7 @@ function desenharBiblioteca() {
     desenharPessoa(
 
         professor,
-
         "#2563eb",
-
         "Professor"
 
     );
@@ -1103,9 +1607,7 @@ function desenharBiblioteca() {
     desenharPessoa(
 
         bibliotecaria,
-
         "#9333ea",
-
         "Bibliotecária"
 
     );
@@ -1114,9 +1616,7 @@ function desenharBiblioteca() {
     desenharPessoa(
 
         jogador,
-
         "#16a34a",
-
         "Você"
 
     );
@@ -1125,7 +1625,7 @@ function desenharBiblioteca() {
 
 
 /* =====================================================
-   INTERFACE
+   ATUALIZAR INTERFACE
 ===================================================== */
 
 function atualizarInterface() {
@@ -1143,6 +1643,50 @@ function atualizarInterface() {
     document.getElementById(
         "energia"
     ).textContent = energia;
+
+
+    atualizarObjetivo();
+
+}
+
+
+/* =====================================================
+   OBJETIVO ATUAL
+===================================================== */
+
+function atualizarObjetivo() {
+
+    const objetivo =
+        document.getElementById("objetivo");
+
+
+    if (missao === 0) {
+
+        objetivo.textContent =
+            "🎯 Objetivo: Encontre o Professor";
+
+    }
+
+    else if (missao === 1) {
+
+        objetivo.textContent =
+            "❓ Objetivo: Fale novamente com o Professor";
+
+    }
+
+    else if (missao === 2) {
+
+        objetivo.textContent =
+            "🏃 Objetivo: Vá até a Bibliotecária";
+
+    }
+
+    else {
+
+        objetivo.textContent =
+            "🏆 Missão concluída!";
+
+    }
 
 }
 
@@ -1170,7 +1714,8 @@ function moverJogador() {
 
     if (
         teclas["ArrowUp"] ||
-        teclas["w"]
+        teclas["w"] ||
+        teclas["W"]
     ) {
 
         dy -= jogador.velocidade;
@@ -1180,7 +1725,8 @@ function moverJogador() {
 
     if (
         teclas["ArrowDown"] ||
-        teclas["s"]
+        teclas["s"] ||
+        teclas["S"]
     ) {
 
         dy += jogador.velocidade;
@@ -1190,7 +1736,8 @@ function moverJogador() {
 
     if (
         teclas["ArrowLeft"] ||
-        teclas["a"]
+        teclas["a"] ||
+        teclas["A"]
     ) {
 
         dx -= jogador.velocidade;
@@ -1200,7 +1747,8 @@ function moverJogador() {
 
     if (
         teclas["ArrowRight"] ||
-        teclas["d"]
+        teclas["d"] ||
+        teclas["D"]
     ) {
 
         dx += jogador.velocidade;
@@ -1208,10 +1756,11 @@ function moverJogador() {
     }
 
 
-    let novoX =
+    const novoX =
         jogador.x + dx;
 
-    let novoY =
+
+    const novoY =
         jogador.y + dy;
 
 
@@ -1242,7 +1791,7 @@ function moverJogador() {
 
 
 /* =====================================================
-   INTERAÇÃO
+   INTERAÇÃO CORRIGIDA
 ===================================================== */
 
 function interagir() {
@@ -1257,12 +1806,21 @@ function interagir() {
     }
 
 
+    /* ---------------------------------------------
+       PROFESSOR — PRIMEIRO ENCONTRO
+    --------------------------------------------- */
+
     if (
+
         distancia(
             jogador,
             professor
-        ) < 100 &&
+        ) < 130
+
+        &&
+
         missao === 0
+
     ) {
 
         abrirDialogo(
@@ -1278,12 +1836,21 @@ function interagir() {
     }
 
 
+    /* ---------------------------------------------
+       PROFESSOR — DESAFIO
+    --------------------------------------------- */
+
     if (
+
         distancia(
             jogador,
             professor
-        ) < 100 &&
+        ) < 130
+
+        &&
+
         missao === 1
+
     ) {
 
         abrirPergunta();
@@ -1293,23 +1860,59 @@ function interagir() {
     }
 
 
+    /* ---------------------------------------------
+       BIBLIOTECÁRIA — FINAL
+    --------------------------------------------- */
+
     if (
+
         distancia(
             jogador,
             bibliotecaria
-        ) < 100 &&
+        ) < 130
+
+        &&
+
         missao === 2
+
     ) {
 
-        abrirDialogo(
+        missao = 3;
 
-            "Bibliotecária",
+        atualizarInterface();
 
-            "Parabéns! Você completou o desafio. Sua recompensa está liberada."
-
-        );
+        mostrarVitoria();
 
         return;
+
+    }
+
+
+    /* ---------------------------------------------
+       SE ESTIVER LONGE
+    --------------------------------------------- */
+
+    if (missao === 0) {
+
+        alert(
+            "📚 Aproxime-se do Professor para interagir."
+        );
+
+    }
+
+    else if (missao === 1) {
+
+        alert(
+            "📚 Aproxime-se novamente do Professor."
+        );
+
+    }
+
+    else if (missao === 2) {
+
+        alert(
+            "📚 Aproxime-se da Bibliotecária para receber sua recompensa."
+        );
 
     }
 
@@ -1345,6 +1948,10 @@ function abrirDialogo(
 }
 
 
+/* =====================================================
+   FECHAR DIÁLOGO
+===================================================== */
+
 function fecharDialogo() {
 
     dialogoAberto = false;
@@ -1359,13 +1966,12 @@ function fecharDialogo() {
 
         missao = 1;
 
-    }
+        atualizarInterface();
 
-    else if (missao === 2) {
-
-        missao = 3;
-
-        mostrarVitoria();
+        alert(
+            "🎯 NOVA MISSÃO!\n\n" +
+            "Agora fale novamente com o Professor."
+        );
 
     }
 
@@ -1422,13 +2028,13 @@ function respostaCorreta() {
 
     alert(
 
-        "Muito bem! Resposta correta!\n\n" +
+        "🎉 Muito bem! Resposta correta!\n\n" +
 
         "⭐ +100 pontos\n" +
 
         "🪙 +5 moedas\n\n" +
 
-        "Agora vá até a bibliotecária."
+        "🏃 Agora vá até a Bibliotecária."
 
     );
 
@@ -1456,7 +2062,7 @@ function respostaErrada() {
 
     alert(
 
-        "Resposta incorreta.\n\n" +
+        "❌ Resposta incorreta.\n\n" +
 
         "Tente novamente!"
 
@@ -1481,15 +2087,19 @@ function mostrarVitoria() {
     ).textContent = moedas;
 
 
-    document.getElementById(
-        "vitoria"
-    ).style.display = "flex";
+    const tela =
+        document.getElementById("vitoria");
+
+
+    tela.style.display = "flex";
+
+    tela.style.zIndex = "250";
 
 }
 
 
 /* =====================================================
-   GERAR CERTIFICADO
+   CERTIFICADO
 ===================================================== */
 
 function gerarCertificado() {
@@ -1532,7 +2142,8 @@ function gerarCertificado() {
     ).textContent = moedas;
 
 
-    const agora = new Date();
+    const agora =
+        new Date();
 
 
     const data =
@@ -1606,9 +2217,7 @@ function reiniciar() {
 ===================================================== */
 
 document.addEventListener(
-
     "keydown",
-
     function(evento) {
 
         teclas[evento.key] = true;
@@ -1619,25 +2228,23 @@ document.addEventListener(
             evento.key === "E"
         ) {
 
+            evento.preventDefault();
+
             interagir();
 
         }
 
     }
-
 );
 
 
 document.addEventListener(
-
     "keyup",
-
     function(evento) {
 
         teclas[evento.key] = false;
 
     }
-
 );
 
 
@@ -1652,7 +2259,7 @@ function criarControle(
 
     botao.addEventListener(
 
-        "touchstart",
+        "pointerdown",
 
         function(evento) {
 
@@ -1667,7 +2274,7 @@ function criarControle(
 
     botao.addEventListener(
 
-        "touchend",
+        "pointerup",
 
         function(evento) {
 
@@ -1682,20 +2289,7 @@ function criarControle(
 
     botao.addEventListener(
 
-        "mousedown",
-
-        function() {
-
-            teclas[tecla] = true;
-
-        }
-
-    );
-
-
-    botao.addEventListener(
-
-        "mouseup",
+        "pointerleave",
 
         function() {
 
@@ -1708,7 +2302,7 @@ function criarControle(
 
     botao.addEventListener(
 
-        "mouseleave",
+        "pointercancel",
 
         function() {
 
@@ -1722,50 +2316,52 @@ function criarControle(
 
 
 criarControle(
-
     document.getElementById("cima"),
-
     "ArrowUp"
-
 );
 
 
 criarControle(
-
     document.getElementById("baixo"),
-
     "ArrowDown"
-
 );
 
 
 criarControle(
-
     document.getElementById("esquerda"),
-
     "ArrowLeft"
-
 );
 
 
 criarControle(
-
     document.getElementById("direita"),
-
     "ArrowRight"
-
 );
 
 
 /* =====================================================
    BOTÃO INTERAGIR
+   MOUSE + TOUCH + POINTER
 ===================================================== */
 
-document.getElementById(
-    "interagir"
-).addEventListener(
-    "click",
-    interagir
+const botaoInteragir =
+    document.getElementById(
+        "interagir"
+    );
+
+
+botaoInteragir.addEventListener(
+
+    "pointerdown",
+
+    function(evento) {
+
+        evento.preventDefault();
+
+        interagir();
+
+    }
+
 );
 
 
@@ -1776,28 +2372,41 @@ document.getElementById(
 document.getElementById(
     "continuar"
 ).addEventListener(
+
     "click",
+
     fecharDialogo
+
 );
 
 
 /* =====================================================
-   RESPOSTAS
+   RESPOSTA A
 ===================================================== */
 
 document.getElementById(
     "respostaA"
 ).addEventListener(
+
     "click",
+
     respostaErrada
+
 );
 
+
+/* =====================================================
+   RESPOSTA B
+===================================================== */
 
 document.getElementById(
     "respostaB"
 ).addEventListener(
+
     "click",
+
     respostaCorreta
+
 );
 
 
@@ -1829,8 +2438,11 @@ document.getElementById(
 document.getElementById(
     "gerarCertificado"
 ).addEventListener(
+
     "click",
+
     gerarCertificado
+
 );
 
 
@@ -1841,8 +2453,11 @@ document.getElementById(
 document.getElementById(
     "reiniciar"
 ).addEventListener(
+
     "click",
+
     reiniciar
+
 );
 
 
